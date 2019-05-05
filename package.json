@@ -1,0 +1,27 @@
+{
+  "name": "lazy-scripts-demo-page",
+  "version": "0.2.0",
+  "description": "demo page how to use lazy-scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djpogo/lazy-scripts-demo-page.git"
+  },
+  "keywords": [
+    "lazy-scripts",
+    "javascript"
+  ],
+  "author": "Raoul Kramer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djpogo/lazy-scripts-demo-page/issues"
+  },
+  "homepage": "https://github.com/djpogo/lazy-scripts-demo-page#readme",
+  "dependencies": {
+    "lazy-scripts": "^0.2.0",
+    "materialize-css": "^1.0.0-rc.2"
+  }
+}
