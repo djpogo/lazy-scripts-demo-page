@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/djpogo/lazy-scripts-demo-page#readme",
   "dependencies": {
-    "lazy-scripts": "^0.2.0",
-    "materialize-css": "^1.0.0-rc.2"
+    "lazy-scripts": "^0.2.0"
   }
 }
