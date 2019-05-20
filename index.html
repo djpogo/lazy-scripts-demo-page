@@ -3,98 +3,139 @@
     <head>
         <meta charset=utf-8>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>🐨 lazy-scripts demo 🐨</title>
+        <title>lazy-scripts demo</title>
         <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
         <meta name="theme-color" content="#209CEE">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css">
+        <link rel="stylesheet" href="/node_modules/milligram/dist/milligram.min.css">
+        <style>.container {padding: 3rem 0; }</style>
     </head>
     <body>
-        <section class="x-50vh">
-            <h1>LazyScripts Demo</h1>
-            <pre>
-                &lt;script src="lazy-scripts.min.js">&lt;/script>
-                &lt;script>new LazyScripts();&lt;/script>
-            </pre>
-            <style style="display: block">
-                html, body {
-                    width: 100vw;
-                    height: 100vh;
-                    max-width: 100%;
-                    margin: 0;
-                    padding:0;
-                    font-family: 'Times New Roman', Times, serif;
-                }
-                p {
-                    font-family: 'Times New Roman', Times, serif;
-                    font-style: italic;
-                }
-                style {
-                    white-space: pre;
-                    font-family: monospace;
-                }
-                *,*::after,*::before { 
-                    box-sizing: border-box;
-                }
-                .x-100vh {
-                    min-height: 100vh;
-                    border: 1px solid purple;
-                    padding: 10px;
-                }
-                .x-100vh::before {
-                    content: "100 vh…";
-                    color: purple;
-                    font-family: 'Times New Roman', Times, serif;
-                    font-style: italic;
-                }
-                .x-50vh {
-                    padding: 10px;
-                    min-height: 50vh;
-                    border: 1px solid darkgreen;
-                }
-                .x-50vh::before {
-                    color: darkgreen;
-                    font-family: 'Times New Roman', Times, serif;
-                    font-style: italic;
-                    content: "50vh…";
-                }
-                .x-scroll-down {
-                    display: inline-block;
-                    position: relative;
-                    width: 1em;
-                    height: 1.2em;
-                    overflow: hidden;
-                }
-                .x-scroll-down::before {
-                    content: "🐨";
-                    display: block;
-                    transform: rotate(90deg);
-                }
-            </style>
-            …<span class="x-scroll-down"></span>scroll down<span class="x-scroll-down"></span>…
-        </section>
-        <section class="x-50vh" data-script-one-target data-lazy-script="/dummy-js/script-1.js">
-            <p>Script 1 Container</p>
-        </section>
-        <section class="x-50vh">
-            
-        </section>
-        <section class="x-100vh">
-            
-        </section>
-        <section class="x-50vh" data-script-two-target data-lazy-scripts='["https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js","/dummy-js/script-2.js"]'>
-            <p>Script 2 Container</p>
-        </section>
-        <section class="x-100vh">
-            <p>thats it</p>
-        </section>
-        <script style="display: block" src="/node_modules/lazy-scripts/dist/lazy-scripts.min.js"></script>
-        <script style="display: block">
-            new LazyScripts();
-        </script>
-        <!--<script type="module">
-            import LazyScripts from "../dist/lazy-scripts.es.js";
-            new LazyScripts();
-        </script>-->
+        <main class="wrapper">
+            <header class="header">
+                <section class="container">
+                    <h1><em>LazyScripts</em></h1>
+                    <figure>
+                        <blockquote>
+                            The most performant JavaScripts are the ones that <strong>never gets downloaded</strong>…
+                        </blockquote>
+                        <figcaption>
+                            <cite>Every web performance optimization person… always</cite>
+                        </figcaption>
+                    </figure>
+                    <p><em>LazyScripts</em> takes the idea of lazy loaded images into javascript level.</p>
+                    <p>Split your JavaScripts into <em>single-concern-files</em> and download and execute them, the moment they appear in your viewport.</p>
+                    <p>A cool slider below the fold? A nice glimmerjs widget below the fold? A map? Save at initial bytes, but not at your user's experience!</p>
+                </section>
+            </header>
+            <section class="container">
+                <h2>Quick Start</h2>
+                <pre><code>npm install lazy-scripts --save</code></pre>
+                <p>Use it in your ES-6 environment:</p>
+                <pre><code>
+                    import LazyScripts from 'lazy-scripts';
+                    ...
+                    const ls = new LazyScripts({});
+                    ...
+                </code></pre>
+                <p>Or take a ES-5 copy from the <code>/dist</code> folder.</p>
+                <pre><code>
+                    &lt;script src="/vendor/lazy-scripts.min.js">&lt;/script>
+                    &lt;script>new LazyScripts();&lt;/script>
+                </code></pre>
+                <p>Add this <code>data-attributes</code> to your Markup:</p>
+                <pre><code>
+                    &lt;section class="component-one" data-lazy-script="/path/to/a/javascript/file.js">coomponent markup&lt;/section>
+                </code></pre>
+                <p>or - if your component needs more than one script:</p>
+                <pre><code>
+                    &lt;section 
+                        class="component-one"
+                        data-lazy-scripts='["/path/to/vendor/script.js","/path/to/another/javascript/file.js"]'>
+                            component markup
+                    &lt;/section>
+                </code></pre>
+                <p>Scripts, defined with <code>data-lazy-scripts</code> attribute are executed in order.</p>
+                <h3>Altering <ode>data-attribute</ode></h3>
+                <p>The constructor call can be fitted with an option object, to change one or both <code>data-attributes</code> name:</p>
+                <pre><code>
+                    const ls = new LazyScripts({
+                        lazyScriptSelector: 'data-ls',
+                        lazyScriptsSelector: 'data-lss'
+                    });
+                    // or
+                    const ls = new LazyScripts({
+                        lazyScriptSelector: 'data-ls'
+                    });
+                    // or
+                    const ls = new LazyScripts({
+                        lazyScriptsSelector: 'data-lss'
+                    });
+                </code></pre>
+            </section>
+            <section class="container">
+                <h2>Events</h2>
+                <p>You want to know which script got loaded and may take an action on this?</p>
+                <pre><code>
+                    document.body.addEventListener('lazyScriptLoaded', myLazyScriptLoadedHandler);
+                </code></pre>
+                <pre><code>
+                    function myLazyScriptLoadedHandler(scriptSrc) {
+                        console.log(`loaded script: ${scriptSrc}`);
+                    }
+                </code></pre>
+                <p>A <code>CustomEvent</code> called <strong>lazyScriptLoaded</strong> is fired on every successful script loading.</p>
+                <h3>And this makes sense when?</h3>
+                <p>Let's imagine a scroll-to handler scrolls down your website. During this scrolling some lazy-scripts appear and get loaded. Chances this scripts manipulate your DOM and it's layout are high. So your scroll-to scroller will scroll to somewhere, where your target was, but it is not anymore. With listening to the events, you can recalculate your scroll to target.</p>
+            </section>
+            <section class="container">
+                <h2><abbr title="Immediately-invoked Function Expression">IIFE</abbr>s ok, but other scripts?</h2>
+                <p>For the moment yes. Split your code into library code and self-executing user code and <em>LazyScripts</em> can increase your <abbr title="Time To Interact">TTI</abbr>.</p>
+                <p>Code-Hooks for <code>onload</code> event is planned.</p>
+            </section>
+            <hr>
+            <section class="container">
+                <h2>Examples</h2>
+                <p>the following section uses <em>LazyScripts</em> to load some very basic javascripts:</p>
+                <ul>
+                    <li><a href="/dummy-js/script-1.js">script-1.js</a></li>
+                    <li><a href="/dummy-js/script-2.js">script-2.js</a></li>
+                </ul>
+                <p>The second section grabs a copy of <code>moment.js</code> before script-2.js is executed, because script-2 uses a function of moment.</p>
+                <p>Better examples on the way...</p>
+            </section>
+            <section class="x-50vh container" data-script-one-target data-lazy-script="/dummy-js/script-1.js">
+                <p>Script 1 Container</p>
+            </section>
+            <section class="x-50vh container" data-script-two-target data-lazy-scripts='["https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js","/dummy-js/script-2.js"]'>
+                <p>Script 2 Container</p>
+            </section>
+            <script src="/node_modules/lazy-scripts/dist/lazy-scripts.min.js"></script>
+            <script>
+                new LazyScripts();
+            </script>
+            <!--<script type="module">
+                import LazyScripts from "../dist/lazy-scripts.es.js";
+                new LazyScripts();
+            </script>-->
+            <section class="container">
+                <h2>Browser Support</h2>
+                <p>If a browser does not support <em>IntersectionObserver</em> you can add a polyfill, or every scripts are loaded directly after <em>LazyScripts</em> constructor call. Like the browser would do too.</p>
+                <p>I added two polyfills from the mdn-polyfill package: <code>mdn-polyfills/NodeList.prototype.forEach</code> and <code>mdn-polyfills/CustomEvent</code>.</p>
+            </section>
+            <footer class="footer">
+                <section class="container">
+                    <h2>Thanks</h2>
+                    <ul>
+                        <li><a href="https://apoorv.pro/" target="_blank">Apoorv Saxena</a> and his <a href="https://github.com/ApoorvSaxena/lozad.js" target="_blank">lozad</a> repository, the rollup config is heavily inspired by lozad.</li>
+                        <li><a href="https://bold-ventures.rocks" target="_blank">bold ventures</a> - my employer, sharing the same spirit of web development as I do.</li>
+                        <li><a href="https://milligram.io/" target="_blank">milligram</a> - a nice typography css framework, this page is done with.</li>
+                    </ul>
+                </section>
+            </footer>
+        </main>
     </body>
 </html>

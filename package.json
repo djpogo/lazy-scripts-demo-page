@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/djpogo/lazy-scripts-demo-page#readme",
   "dependencies": {
-    "lazy-scripts": "^0.2.0"
+    "lazy-scripts": "^0.2.2",
+    "milligram": "^1.3.0"
   }
 }
