@@ -88,6 +88,7 @@
                     }
                 </code></pre>
                 <p>A <code>CustomEvent</code> called <strong>lazyScriptLoaded</strong> is fired on every successful script loading.</p>
+                <p>With version <code>0.2.3</code> the <code>CustomEvent</code> polyfill was removed and the corresponding code is warpped with <code>if (window.CustomEvent) { … }</code>.</p>
                 <h3>And this makes sense when?</h3>
                 <p>Let's imagine a scroll-to handler scrolls down your website. During this scrolling some lazy-scripts appear and get loaded. Chances this scripts manipulate your DOM and it's layout are high. So your scroll-to scroller will scroll to somewhere, where your target was, but it is not anymore. With listening to the events, you can recalculate your scroll to target.</p>
             </section>
@@ -124,7 +125,7 @@
             <section class="container">
                 <h2>Browser Support</h2>
                 <p>If a browser does not support <em>IntersectionObserver</em> you can add a polyfill, or every scripts are loaded directly after <em>LazyScripts</em> constructor call. Like the browser would do too.</p>
-                <p>I added two polyfills from the mdn-polyfill package: <code>mdn-polyfills/NodeList.prototype.forEach</code> and <code>mdn-polyfills/CustomEvent</code>.</p>
+                <p>I added two polyfills from the mdn-polyfill package: <code>mdn-polyfills/NodeList.prototype.forEach</code> <del>and <code>mdn-polyfills/CustomEvent</code></del>.</p>
             </section>
             <footer class="footer">
                 <section class="container">
