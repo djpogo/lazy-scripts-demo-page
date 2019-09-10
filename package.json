@@ -1,6 +1,6 @@
 {
   "name": "lazy-scripts-demo-page",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "demo page how to use lazy-scripts",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/djpogo/lazy-scripts-demo-page#readme",
   "dependencies": {
-    "lazy-scripts": "^0.2.3",
+    "lazy-scripts": "^0.3.1",
     "milligram": "^1.3.0"
   }
 }

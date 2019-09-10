@@ -11,7 +11,36 @@
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
         <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css">
         <link rel="stylesheet" href="/node_modules/milligram/dist/milligram.min.css">
-        <style>.container {padding: 3rem 0; }</style>
+        <style>
+            .container {padding: 3rem 0; }
+            .demo {
+                background-color: #E9DCFF;
+                margin: 3em auto 2em;
+                position: relative;
+                padding: 3em 1em;
+            }
+            .demo::before {
+                content: 'demo area...';
+                position: absolute;
+                top: -2em;
+                background-color: #e9dcff;
+                padding: 1em;
+                color: #993D86;
+            }
+            .button {
+                background-color: #993D86;
+                color: #fff;
+                border: 1px solid #fff;
+                border-radius: 2px;
+            }
+            .code {
+                display: block;
+                font-family: monospace;
+                color: #000;
+                background: rgba(255,255,255, .2);
+                white-space: pre;
+            }
+        </style>
     </head>
     <body>
         <main class="wrapper">
@@ -108,13 +137,25 @@
                 <p>The second section grabs a copy of <code>moment.js</code> before script-2.js is executed, because script-2 uses a function of moment.</p>
                 <p>Better examples on the way...</p>
             </section>
-            <section class="x-50vh container" data-script-one-target data-lazy-script="/dummy-js/script-1.js">
+            <section class="x-50vh container demo demo--one" data-script-one-target data-lazy-script="/dummy-js/script-1.js">
                 <p>Script 1 Container</p>
             </section>
-            <section class="x-50vh container" data-script-two-target data-lazy-scripts='["https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js","/dummy-js/script-2.js"]'>
+            <section class="x-50vh container demo demo--two" data-script-two-target data-lazy-scripts='["https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js","/dummy-js/script-2.js"]'>
                 <p>Script 2 Container</p>
             </section>
-            <script src="/node_modules/lazy-scripts/dist/lazy-scripts.min.js"></script>
+            <section class="x-50vh container demo demo--three">
+                <button class="button button--primary" data-load-more>click me, I'll add content which uses <em>LazyScripts</em>.</em></button>
+                <script class="code">
+                    document.querySelector('[data-load-more]').addEventListener('click', function(event) {
+                        var parent = event.target.parentNode;
+                        var newDiv = document.createElement('div');
+                        newDiv.dataset.lazyScript = '/dummy-js/script-3.js';
+                        newDiv.textContent = "New Content";
+                        parent.append(newDiv);
+                    });
+                </script>
+            </section>
+            <script src="/node_modules/lazy-scripts/dist/lazy-scripts.js"></script>
             <script>
                 new LazyScripts();
             </script>
@@ -124,8 +165,8 @@
             </script>-->
             <section class="container">
                 <h2>Browser Support</h2>
-                <p>If a browser does not support <em>IntersectionObserver</em> you can add a polyfill, or every scripts are loaded directly after <em>LazyScripts</em> constructor call. Like the browser would do too.</p>
-                <p>I added two polyfills from the mdn-polyfill package: <code>mdn-polyfills/NodeList.prototype.forEach</code> <del>and <code>mdn-polyfills/CustomEvent</code></del>.</p>
+                <p>If a browser does not support <em>IntersectionObserver</em> you can add a polyfill, or all scripts are loaded directly after <em>LazyScripts</em> constructor call. Like the browser would do too.</p>
+                <p>I added <del>two</del> polyfill<del>s</del> from the mdn-polyfill package: <code>mdn-polyfills/NodeList.prototype.forEach</code> <del>and <code>mdn-polyfills/CustomEvent</code></del>.</p>
             </section>
             <footer class="footer">
                 <section class="container">
